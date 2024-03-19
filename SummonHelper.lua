@@ -11,7 +11,6 @@ local SpellStatus = AceLibrary("SpellStatus-1.0")
 SummonHelper.hasIcon = "Interface\\Icons\\spell_shadow_twilight"
 SummonHelper.defaultMinimapPosition = 160
 SummonHelper.hideWithoutStandby = true
-
 SummonHelper.options = {
 	type = "group",
 	args = {
@@ -67,13 +66,10 @@ function SummonHelper:OnEnable()
 
 	self:RegisterEvent("CHAT_MSG_RAID", "CheckChatMessage")
 	self:RegisterEvent("CHAT_MSG_RAID_LEADER", "CheckChatMessage")
-
 	self:RegisterEvent("CHAT_MSG_WHISPER", "CheckChatMessage")
-
 
 	self:RegisterEvent("SpellStatus_SpellCastCastingStart")
 	self:RegisterEvent("SpellStatus_SpellCastFailure")
-
 	self:RegisterEvent("SpellStatus_SpellCastChannelingStart")
 	self:RegisterEvent("SpellStatus_SpellCastChannelingFinish")
 
