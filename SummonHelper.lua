@@ -38,6 +38,11 @@ SummonHelper.options = {
 }
 
 function SummonHelper:OnInitialize()
+	playerClass = UnitClass("player")
+	if playerClass ~= "术士" then
+		SummonHelper:OnDisable()
+		return
+	end
 	self:SetDebugLevel(3)
 	self.SummonList = {}
 	self:RegisterDB("SummonHelperDB")
