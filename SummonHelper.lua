@@ -39,10 +39,6 @@ SummonHelper.options = {
 
 function SummonHelper:OnInitialize()
 	playerClass = UnitClass("player")
-	if playerClass ~= "术士" then
-		SummonHelper:OnDisable()
-		return
-	end
 	self:SetDebugLevel(3)
 	self.SummonList = {}
 	self:RegisterDB("SummonHelperDB")
@@ -66,6 +62,10 @@ function SummonHelper:OnProfileEnable()
 end
 
 function SummonHelper:OnEnable()
+	if playerClass ~= "术士" then
+		SummonHelper:OnDisable()
+		return
+	end
 	print( "GetDebugLevel " .. self:GetDebugLevel())
 	self:RegisterComm(Prefix, "RAID")
 	if not self:IsCommRegistered(Prefix,"RAID") then
