@@ -180,12 +180,15 @@ function SummonHelper:SummonFonc(name)
 	SummonHelper:SendCommMessage("RAID","Summoning", name )
 	local unitId = self:GetUnitId(name)
 	local playerZone = self:GetZone("player")
+	TargetUnit(unitId)
 	if UnitAffectingCombat("player") then
 		self:Print(L["You are in combat"])
 	elseif UnitAffectingCombat(unitId) then
 		self:Print(string.format(L["%s is in combat"], name))
+	elseif CheckInteractDistance("target", 4) then
+		self:Print(string.format(L["%s is already here"], name))
+		self:RemoveFonc(name)
 	else
-		TargetUnit(unitId)
 		--CastSpellByName(BS["Ritual of Summoning"])
 		SpellStatus:CastSpellByName(BS["Ritual of Summoning"],false)
 
