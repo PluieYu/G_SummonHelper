@@ -41,6 +41,7 @@ function SummonHelper:OnInitialize()
 	playerClass = UnitClass("player")
 	self:SetDebugLevel(3)
 	self.SummonList = {}
+	self.SummonListHide = {}
 	self:RegisterDB("SummonHelperDB")
 	self:RegisterDefaults("profile", {
 		xOfs = nil,
@@ -242,26 +243,24 @@ function SummonHelper:GetZone(unitId)
 
 	return nil
 end
-
-
-
-
 function SummonHelper:Reflash()
 	for i = 1, 5 do
 		if self.SummonList[i] then
-			self.SummonHelperFrame.frame.Candidate["player"..i].text:SetText(self.SummonList[i])
-			self.SummonHelperFrame.frame.Candidate["player"..i]:Show()
+			if not tablefind(self.SummonListHide, self.SummonList[i]) then
+				self.SummonHelperFrame.frame.Candidate["player"..i].text:SetText(self.SummonList[i])
+				self.SummonHelperFrame.frame.Candidate["player"..i]:Show()
+			end
 		else
 			self.SummonHelperFrame.frame.Candidate["player"..i].text:SetText("N/A")
-			self.SummonHelperFrame.frame.Candidate["player"..i]:Hide()
+			self.SummonHelperFrame.frame.Candidate["player"..i]:Hide()			end
 		end
-	end
 end
 function SummonHelper:HideSummoningTarget(target)
 	for i = 1, 5 do
 		if self.SummonHelperFrame.frame.Candidate["player"..i].text:GetText()  == target then
 			self:LevelDebug(2, format("HideSummoningTarget: %s", tostring(target)))
 			self.SummonHelperFrame.frame.Candidate["player"..i]:Hide()
+			table.insert(self.SummonListHide , target)
 			break
 		end
 	end
@@ -271,6 +270,10 @@ function SummonHelper:ShowSummoningTarget(target)
 		if self.SummonHelperFrame.frame.Candidate["player"..i].text:GetText()  == target then
 			self:LevelDebug(2, format("ShowSummoningTarget: %s", tostring(target)))
 			self.SummonHelperFrame.frame.Candidate["player"..i]:Show()
+			targetPos = tablefind(self.SummonListHide, target)
+			if targetPos then
+				table.remove(self.SummonListHide, targetPos)
+			end
 			break
 		end
 	end
