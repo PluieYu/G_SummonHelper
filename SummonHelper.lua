@@ -87,9 +87,9 @@ function SummonHelper:OnEnable()
 end
 
 function SummonHelper:OnDisable()
-	--if self:IsCommRegistered(Prefix,"RAID") then
-	--	SummonHelper:UnregisterComm(Prefix, "RAID")
-	--end
+	if self:IsCommRegistered(Prefix,"RAID") then
+		SummonHelper:UnregisterComm(Prefix, "RAID")
+	end
 	SummonHelper:UnregisterAllEvents()
 	self.SummonHelperFrame.frame:Hide()
 end
