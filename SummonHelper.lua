@@ -67,7 +67,6 @@ function SummonHelper:OnEnable()
 		SummonHelper:OnDisable()
 		return
 	end
-	print( "GetDebugLevel " .. self:GetDebugLevel())
 	self:RegisterComm(Prefix, "RAID")
 	if not self:IsCommRegistered(Prefix,"RAID") then
 		self:RegisterComm(Prefix, "RAID")
@@ -246,6 +245,9 @@ end
 function SummonHelper:Reflash()
 	for i = 1, 5 do
 		if self.SummonList[i] then
+			if tablefind(self.SummonListHide, self.SummonList[i]) then
+				self:LevelDebug(2, format("Target in the hiden list: %s", tostring(tablefind(self.SummonListHide, self.SummonList[i]) )))
+			end
 			if not tablefind(self.SummonListHide, self.SummonList[i]) then
 				self.SummonHelperFrame.frame.Candidate["player"..i].text:SetText(self.SummonList[i])
 				self.SummonHelperFrame.frame.Candidate["player"..i]:Show()
