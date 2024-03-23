@@ -1,11 +1,11 @@
 ## Interface: 11200
-## Title: xiaopixiang SummonHelper |cff7fff7fby |cffF5F54AA
+## Title: |CFFFF6060[xiaopixiang]|R|CFF9482C9[WarLock]|R|cffF5F54ASummonHelper
+## Notes: |CFFFF8080xiaopixiang SummonHelper
+## Title-zhCN:|CFFFF6060[小皮箱]|R|CFF9482C9[术士]|R|cffF5F54A召唤助手
+## Notes-zhCN:|CFFFF8080这是专门为小皮箱定制的术士召唤助手。
 ## Author: Yu
-## Version: 0.1
-## Notes: xiaopixiang SummonHelper
+## Version: 1.0.0
 ## SavedVariables: SummonHelperDB
-## Title-zhCN:|CFFFF6060[小皮箱]|R|CFF9482C9[术士]|R召唤助手
-## Notes-zhCN:|CFFFF8080这是专门为小皮箱定制的术士召唤助手。|
 ## DefaultState: Enabled
 ## LoadOnDemand: 0
 Locale-zhCN.lua
