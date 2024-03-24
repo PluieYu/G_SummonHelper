@@ -196,10 +196,17 @@ function SummonHelper:SummonFonc(name)
 		if GetNumRaidMembers() > 0 then
 			chatType = "RAID"
 		end
-		SendChatMessage(string.format(L["Summoning %s to %s Please assist summoning"], name, playerZone), chatType)
+		SendChatMessage(string.format(L["Summoning %s to %s Please assist summoning"], self:GetUnitNameWithColors(name), playerZone), chatType)
 		SendChatMessage(string.format(L["Summoning you to %s"], playerZone), "WHISPER", nil, name)
 	end
 end
+
+
+
+
+
+
+
 
 
 function SummonHelper:GetUnitId(name)
@@ -294,3 +301,28 @@ end
 --		end
 --	end
 --end
+
+function SummonHelper:GetRaidIndex(name)
+	local prefix = nil
+	local NumMembers = GetNumRaidMembers()
+	if NumMembers then
+		prefix = "raid"
+	else
+		NumMembers = GetNumPartyMembers()
+		prefix = "party"
+	end
+	for i = 1, NumMembers do
+		if UnitName(prefix..i) == name then
+			return prefix..i
+		end
+	end
+end
+
+function SummonHelper:GetUnitNameWithColors(name)
+	local raidIndex = self:GetRaidIndex(name)
+	local className, classFilename = UnitClass(raidIndex)
+	local c = RAID_CLASS_COLORS[classFilename]
+	local classhexe = string.format("%2x%2x%2x", c.r*255, c.g*255, c.b*255)
+	local nameWithColors = string.format("|cFF%s%s|r",  classhexe, name)
+	return nameWithColors
+end

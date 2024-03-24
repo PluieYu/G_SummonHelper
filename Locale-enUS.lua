@@ -13,7 +13,7 @@ L:RegisterTranslations("enUS", function() return {
 	["You are in combat"] = '你正在战斗中',
 	["%s is in combat"] = ' %s 正在战斗中',
 	["%s is already here"] = ' %s 已经在身边',
-	["Summoning %s to %s Please assist summoning"] = "<小皮箱术士拉人助手> 正在将 >-%s-< 拖拽到 >-%s-< 周围的队友麻溜的点门",
+	["Summoning %s to %s Please assist summoning"] = "<小皮箱术士拉人助手> 正在将 |cffF5F54A[|r%s|cffF5F54A]|r 拖拽到 |cffF5F54A[%s]|r 周围的队友麻溜的点门",
 	["Summoning you to %s"] =  "<小皮箱术士拉人助手> <-%s-> 的召唤仪式5秒后启动 请耐心等待",
 	["Summoning failed"] =     "<小皮箱术士拉人助手> 召唤仪式遭到破坏 请耐心等待后继续召唤",
 	["Summoning on the way"] = "<小皮箱术士拉人助手> 召唤仪式已经启动 等待周围队友点门 请开麦催促点门",
