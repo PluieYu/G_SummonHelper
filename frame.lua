@@ -63,7 +63,11 @@ function SummonHelperFrame:SetupFrame()
                 if GetNumRaidMembers() > 0 then
                     chatType = "RAID"
                 end
-                SendChatMessage(string.format(L["Say key words to get Summon  to %s"], playerZone ), chatType)
+                SendChatMessage(
+                        string.format(
+                                string.format("%s: %s", L["小皮箱术士拉人助手"], L["团队打字打关键词被拉到 %s"]),
+                                playerZone ),
+                        chatType)
             end
     )
     frame.announceButton.texture= self:CreateButtontexture(
@@ -82,7 +86,7 @@ function SummonHelperFrame:SetupFrame()
     frame.header:SetPoint("TOP", frame, "TOP", 5, -14)
     frame.header:SetFont(L["font"], 12)
     frame.header:SetJustifyH("LEFT")
-    frame.header:SetText(L["SummonHelperFrame"])
+    frame.header:SetText(L["小皮箱术士拉人助手"])
     frame.header:SetShadowOffset(.8, -.8)
     frame.header:SetShadowColor(0, 0, 0, 1)
 

@@ -22,15 +22,15 @@ SummonHelper.options = {
 	args = {
 		ResetPos = {
 			type = "execute",
-			name = L["ResetPos"],
-			desc = L["Reset frame position."],
+			name = L["重置"],
+			desc = L["重置拉人界面"],
 			order = 1,
 			func = function() SummonHelper.SummonHelperFrame:ResetFramePosition() end,
 		},
 		ShowFrame = {
 			type = "execute",
-			name = L["ShowFrame"],
-			desc = L["Show SummonHelper Frame"],
+			name = L["显示"],
+			desc = L["显示拉人界面"],
 			order = 1,
 			func = function() SummonHelper.SummonHelperFrame.frame:Show() end,
 		},
@@ -55,7 +55,7 @@ function SummonHelper:OnInitialize()
 	self.OnMenuRequest = SummonHelper.options
 	self:SetCommPrefix(Prefix)
 	self:RegisterChatCommand({"/smh", "/SummonHelper"}, SummonHelper.options)
-	DEFAULT_CHAT_FRAME:AddMessage("|cff00ffff"..L["SummonHelperFrame"].. "已加载|r")
+	DEFAULT_CHAT_FRAME:AddMessage(string.format("%s: %s", L["小皮箱术士拉人助手"], L["已加载"]))
 end
 
 function SummonHelper:OnProfileEnable()
@@ -96,8 +96,8 @@ end
 
 
 function SummonHelper:CheckChatMessage(msg, name)
-	if not string.find(msg,  L["SummonHelperFrame"]) then
-		for _, word in pairs(L["key words"]) do
+	if not string.find(msg,  L["小皮箱术士拉人助手"]) then
+		for _, word in pairs(L["关键词"]) do
 			index_stat, index_end = string.find(msg, word);
 			if index_stat then
 				self:OnCommReceive("", "", "RAID", "Add", name)
@@ -120,7 +120,7 @@ end
 function SummonHelper:SpellStatus_SpellCastChannelingStart(id, name, fullName, startTime, stopTime, duration)
 	if name == BS["Ritual of Summoning"] then
 		self:LevelDebug(2, format("SpellStatus_SpellCastChannelingStart: <%s>", tostring(name)))
-		SendChatMessage(string.format(L["Summoning on the way"]), "WHISPER", nil, self.SummoningTarget)
+		SendChatMessage(string.format("%s: %s", L["小皮箱术士拉人助手"], L["召唤仪式已经启动"]), "WHISPER", nil, self.SummoningTarget)
 
 	end
 end
@@ -129,7 +129,7 @@ function SummonHelper:SpellStatus_SpellCastFailure(id, name, fullName, raison,ra
 	if name == BS["Ritual of Summoning"] then
 		self:LevelDebug(2, format("SpellStatus_SpellCastFailure on : <%s> for the reason <%s>", tostring(name), tostring(raison)))
 		self:SendCommMessage("RAID","SummoningFailure", self.SummoningTarget )
-		SendChatMessage(string.format(L["Summoning failed"]), "WHISPER", nil, self.SummoningTarget)
+		SendChatMessage(string.format("%s: %s", L["小皮箱术士拉人助手"], L["召唤仪式遭到破坏"]), "WHISPER", nil, self.SummoningTarget)
 	end
 end
 
@@ -137,7 +137,7 @@ end
 function SummonHelper:SpellStatus_SpellCastChannelingFinish(id, name, fullName, raison)
 	if name == BS["Ritual of Summoning"] then
 		self:LevelDebug(2, format("SpellStatus_SpellCastChannelingFinish on : <%s> for the reason <%s>", tostring(name), tostring(raison)))
-		SendChatMessage(string.format(L["Summoning finish"]), "WHISPER", nil, self.SummoningTarget)
+		SendChatMessage(string.format("%s: %s", L["小皮箱术士拉人助手"], L["召唤仪式已经完成"]), "WHISPER", nil, self.SummoningTarget)
 		SummonHelper:RemoveFonc(self.SummoningTarget)
 
 	end
@@ -182,11 +182,11 @@ function SummonHelper:SummonFonc(name)
 	local playerZone = self:GetZone("player")
 	TargetUnit(unitId)
 	if UnitAffectingCombat("player") then
-		self:Print(L["You are in combat"])
+		self:Print(L["你正在战斗中"])
 	elseif UnitAffectingCombat(unitId) then
-		self:Print(string.format(L["%s is in combat"], name))
+		self:Print(string.format(L["%s 在战斗中"], name))
 	elseif CheckInteractDistance("target", 4) then
-		self:Print(string.format(L["%s is already here"], name))
+		self:Print(string.format(L["%s 已在身边"], name))
 		self:RemoveFonc(name)
 	else
 		--CastSpellByName(BS["Ritual of Summoning"])
@@ -196,8 +196,16 @@ function SummonHelper:SummonFonc(name)
 		if GetNumRaidMembers() > 0 then
 			chatType = "RAID"
 		end
-		SendChatMessage(string.format(L["Summoning %s to %s Please assist summoning"], self:GetUnitNameWithColors(name), playerZone), chatType)
-		SendChatMessage(string.format(L["Summoning you to %s"], playerZone), "WHISPER", nil, name)
+		SendChatMessage(
+				string.format(
+						string.format("%s: %s", L["小皮箱术士拉人助手"], L["正在将%s拉到 %s"]),
+						self:GetUnitNameWithColors(name), playerZone),
+				chatType)
+		SendChatMessage(
+				string.format(
+						string.format("%s: %s", L["小皮箱术士拉人助手"], L["正在召唤你倒 %s"]),
+						playerZone),
+				"WHISPER", nil, name)
 	end
 end
 

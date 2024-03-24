@@ -1,23 +1,25 @@
 
 local L = AceLibrary("AceLocale-2.2"):new("SummonHelper")
 L:RegisterTranslations("zhCN", function() return {
-	["SummonHelperFrame"] = '小皮箱术士拉人助手',
-	["ResetPos"] = "重置位置",
-	["Reset frame position."] = "重置拉人界面",
-	["ShowFrame"]= "显示",
-	["Show SummonHelper Frame"]= "显示拉人界面",
+	["小皮箱术士拉人助手"] = "|cffFF6060[小皮箱]|r|cff9482C9术士拉人助手|r",
+	["已加载"] = "已加载",
+	["重置"] = "重置",
+	["重置拉人界面"] = "重置拉人界面",
+	["显示"]= "显示",
+	["显示拉人界面"]= "显示拉人界面",
 
-	["key words"] = { '求拉', '求啦' },
-	["Say key words to get Summon  to %s"] = "<小皮箱术士拉人助手> 团队打字'求拉'即可被召唤到 >-%s-<",
+	["关键词"] = { "求拉", "求啦" },
+	["团队打字打关键词被拉到 %s"] = "<小皮箱术士拉人助手> 团队打字'求拉'即可被召唤到 |cffF5F54A[%s]|r",
 
-	["You are in combat"] = '你正在战斗中',
-	["%s is in combat"] = ' %s 正在战斗中',
-	["%s is already here"] = ' %s 已经在身边',
-	["Summoning %s to %s Please assist summoning"] = "<小皮箱术士拉人助手> 正在将 |cffF5F54A[|r%s|cffF5F54A]|r 拖拽到 |cffF5F54A[%s]|r 周围的队友麻溜的点门",
-	["Summoning you to %s"] =  "<小皮箱术士拉人助手> <-%s-> 的召唤仪式5秒后启动 请耐心等待",
-	["Summoning failed"] =     "<小皮箱术士拉人助手> 召唤仪式遭到破坏 请耐心等待后继续召唤",
-	["Summoning on the way"] = "<小皮箱术士拉人助手> 召唤仪式已经启动 等待周围队友点门 请开麦催促点门",
-	["Summoning finish"] =     "<小皮箱术士拉人助手> 召唤仪式已经完成 麻溜的点确认过来 若1分钟后没有确认 回复'求拉'继续",
+	["你正在战斗中"] = "你正在战斗中",
+	["%s 在战斗中"] = " %s 正在战斗中",
+	["%s 已在身边"] = " %s 已经在身边",
+
+	["正在将%s拉到 %s"] = "正在将 |cffF5F54A[|r%s|cffF5F54A]|r 拖拽到 |cffF5F54A[%s]|r 需要两个好心人帮忙点门",
+	["正在召唤你倒 %s"] = "|cffF5F54A[%s]|r 的召唤仪式5秒后启动 请耐心等待",
+	["召唤仪式遭到破坏"] = "召唤仪式遭到破坏 请耐心等待后继续召唤",
+	["召唤仪式已经启动"] = "召唤仪式已经启动 等待周围队友点门 请开麦催促",
+	["召唤仪式已经完成"] = "召唤仪式已经完成 麻溜的点确认过来 若1分钟后没有确认 回复'求拉'继续",
 	font = "Fonts\\FRIZQT__.TTF"
 } end)
 
