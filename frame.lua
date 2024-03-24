@@ -65,7 +65,7 @@ function SummonHelperFrame:SetupFrame()
                 end
                 SendChatMessage(
                         string.format(
-                                string.format("%s: %s", L["小皮箱术士拉人助手"], L["团队打字打关键词被拉到 %s"]),
+                                string.format("%s  %s", L["小皮箱术士拉人助手"], L["团队打字打关键词被拉到 %s"]),
                                 playerZone ),
                         chatType)
             end

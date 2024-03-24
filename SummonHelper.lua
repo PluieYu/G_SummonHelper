@@ -55,7 +55,7 @@ function SummonHelper:OnInitialize()
 	self.OnMenuRequest = SummonHelper.options
 	self:SetCommPrefix(Prefix)
 	self:RegisterChatCommand({"/smh", "/SummonHelper"}, SummonHelper.options)
-	DEFAULT_CHAT_FRAME:AddMessage(string.format("%s: %s", L["小皮箱术士拉人助手"], L["已加载"]))
+	DEFAULT_CHAT_FRAME:AddMessage(string.format("%s : %s", L["小皮箱术士拉人助手"], L["已加载"]))
 end
 
 function SummonHelper:OnProfileEnable()
@@ -96,7 +96,8 @@ end
 
 
 function SummonHelper:CheckChatMessage(msg, name)
-	if not string.find(msg,  L["小皮箱术士拉人助手"]) then
+	local stringLen = string.len( L["小皮箱术士拉人助手"])
+	if string.sub(msg,0, stringLen) ~= L["小皮箱术士拉人助手"] then
 		for _, word in pairs(L["关键词"]) do
 			index_stat, index_end = string.find(msg, word);
 			if index_stat then
@@ -106,8 +107,6 @@ function SummonHelper:CheckChatMessage(msg, name)
 			end
 		end
 	end
-	--self:IsCommRegistered(Prefix,"RAID")
-
 end
 
 function SummonHelper:SpellStatus_SpellCastCastingStart(_, name, _, _, _, _)
@@ -122,7 +121,7 @@ function SummonHelper:SpellStatus_SpellCastChannelingStart(_, name, _, _, _, _)
 	--id, name, fullName, startTime, stopTime, duration
 	if name == BS["Ritual of Summoning"] then
 		self:LevelDebug(2, format("SpellStatus_SpellCastChannelingStart: <%s>", tostring(name)))
-		SendChatMessage(string.format("%s: %s", L["小皮箱术士拉人助手"], L["召唤仪式已经启动"]), "WHISPER", nil, self.SummoningTarget)
+		SendChatMessage(string.format("%s  %s", L["小皮箱术士拉人助手"], L["召唤仪式已经启动"]), "WHISPER", nil, self.SummoningTarget)
 
 	end
 end
@@ -132,7 +131,7 @@ function SummonHelper:SpellStatus_SpellCastFailure(_, name, _, raison, _, _, _)
 	if name == BS["Ritual of Summoning"] then
 		self:LevelDebug(2, format("SpellStatus_SpellCastFailure on : <%s> for the reason <%s>", tostring(name), tostring(raison)))
 		self:SendCommMessage("RAID","SummoningFailure", self.SummoningTarget )
-		SendChatMessage(string.format("%s: %s", L["小皮箱术士拉人助手"], L["召唤仪式遭到破坏"]), "WHISPER", nil, self.SummoningTarget)
+		SendChatMessage(string.format("%s  %s", L["小皮箱术士拉人助手"], L["召唤仪式遭到破坏"]), "WHISPER", nil, self.SummoningTarget)
 	end
 end
 
@@ -141,7 +140,7 @@ function SummonHelper:SpellStatus_SpellCastChannelingFinish(_, name, _, raison)
 	--id, name, fullName, raison
 	if name == BS["Ritual of Summoning"] then
 		self:LevelDebug(2, format("SpellStatus_SpellCastChannelingFinish on : <%s> for the reason <%s>", tostring(name), tostring(raison)))
-		SendChatMessage(string.format("%s: %s", L["小皮箱术士拉人助手"], L["召唤仪式已经完成"]), "WHISPER", nil, self.SummoningTarget)
+		SendChatMessage(string.format("%s  %s", L["小皮箱术士拉人助手"], L["召唤仪式已经完成"]), "WHISPER", nil, self.SummoningTarget)
 		SummonHelper:RemoveFonc(self.SummoningTarget)
 
 	end
@@ -203,12 +202,12 @@ function SummonHelper:SummonFonc(name)
 		end
 		SendChatMessage(
 				string.format(
-						string.format("%s: %s", L["小皮箱术士拉人助手"], L["正在将%s拉到 %s"]),
+						string.format("%s  %s", L["小皮箱术士拉人助手"], L["正在将%s拉到 %s"]),
 						self:GetUnitNameWithColors(name), playerZone),
 				chatType)
 		SendChatMessage(
 				string.format(
-						string.format("%s: %s", L["小皮箱术士拉人助手"], L["正在召唤你倒 %s"]),
+						string.format("%s  %s", L["小皮箱术士拉人助手"], L["正在召唤你倒 %s"]),
 						playerZone),
 				"WHISPER", nil, name)
 	end
