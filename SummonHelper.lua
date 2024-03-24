@@ -110,14 +110,16 @@ function SummonHelper:CheckChatMessage(msg, name)
 
 end
 
-function SummonHelper:SpellStatus_SpellCastCastingStart(id, name, fullName, startTime, stopTime, duration)
+function SummonHelper:SpellStatus_SpellCastCastingStart(_, name, _, _, _, _)
+	--id, name, fullName, startTime, stopTime, duration
 	if name == BS["Ritual of Summoning"] then
 		self:LevelDebug(2, format("SpellStatus_SpellCastCastingStart: <%s>", tostring(name)))
 		self.SummoningTarget = UnitName("target")
 		self:SendCommMessage("RAID","Summoning", self.SummoningTarget )
 	end
 end
-function SummonHelper:SpellStatus_SpellCastChannelingStart(id, name, fullName, startTime, stopTime, duration)
+function SummonHelper:SpellStatus_SpellCastChannelingStart(_, name, _, _, _, _)
+	--id, name, fullName, startTime, stopTime, duration
 	if name == BS["Ritual of Summoning"] then
 		self:LevelDebug(2, format("SpellStatus_SpellCastChannelingStart: <%s>", tostring(name)))
 		SendChatMessage(string.format("%s: %s", L["小皮箱术士拉人助手"], L["召唤仪式已经启动"]), "WHISPER", nil, self.SummoningTarget)
@@ -125,7 +127,8 @@ function SummonHelper:SpellStatus_SpellCastChannelingStart(id, name, fullName, s
 	end
 end
 
-function SummonHelper:SpellStatus_SpellCastFailure(id, name, fullName, raison,raison2,raison3,raison4 )
+function SummonHelper:SpellStatus_SpellCastFailure(_, name, _, raison, _, _, _)
+	--id, name, fullName, raison,raison2,raison3,raison4
 	if name == BS["Ritual of Summoning"] then
 		self:LevelDebug(2, format("SpellStatus_SpellCastFailure on : <%s> for the reason <%s>", tostring(name), tostring(raison)))
 		self:SendCommMessage("RAID","SummoningFailure", self.SummoningTarget )
@@ -134,7 +137,8 @@ function SummonHelper:SpellStatus_SpellCastFailure(id, name, fullName, raison,ra
 end
 
 
-function SummonHelper:SpellStatus_SpellCastChannelingFinish(id, name, fullName, raison)
+function SummonHelper:SpellStatus_SpellCastChannelingFinish(_, name, _, raison)
+	--id, name, fullName, raison
 	if name == BS["Ritual of Summoning"] then
 		self:LevelDebug(2, format("SpellStatus_SpellCastChannelingFinish on : <%s> for the reason <%s>", tostring(name), tostring(raison)))
 		SendChatMessage(string.format("%s: %s", L["小皮箱术士拉人助手"], L["召唤仪式已经完成"]), "WHISPER", nil, self.SummoningTarget)
@@ -144,7 +148,8 @@ function SummonHelper:SpellStatus_SpellCastChannelingFinish(id, name, fullName, 
 end
 
 
-function SummonHelper:OnCommReceive(prefix, sender, distribution, method, target)
+function SummonHelper:OnCommReceive(_, _, _, method, target)
+	--prefix, sender, distribution, method, target
 	if target ~= nil and method ~= nil then
 		targetPos = tablefind(self.SummonList, target)
 		self:LevelDebug(2, format("Got Comm Msg: <%s> on <%s>", tostring(method), tostring(target)))
@@ -208,14 +213,6 @@ function SummonHelper:SummonFonc(name)
 				"WHISPER", nil, name)
 	end
 end
-
-
-
-
-
-
-
-
 
 function SummonHelper:GetUnitId(name)
 	if GetNumRaidMembers() > 0 then
@@ -296,25 +293,12 @@ function SummonHelper:ShowSummoningTarget(target)
 	end
 end
 
---function SummonHelper:autoSummon()
---	local timeStart = os.time()
---	while true do
---		if not endSpellStatus:IsCastingOrChanneling()  then
---			local target = SummonList[1]
---			if target then
---				self:SummonFonc(target)
---			elseif os.time() - timeStart > 60 * 5 then
---				break
---			end
---		end
---	end
---end
-
 function SummonHelper:GetRaidIndex(name)
-	local prefix = nil
+	local prefix
 	local NumMembers = GetNumRaidMembers()
 	if NumMembers then
 		prefix = "raid"
+		NumMembers = 40
 	else
 		NumMembers = GetNumPartyMembers()
 		prefix = "party"
@@ -328,7 +312,7 @@ end
 
 function SummonHelper:GetUnitNameWithColors(name)
 	local raidIndex = self:GetRaidIndex(name)
-	local className, classFilename = UnitClass(raidIndex)
+	local _, classFilename = UnitClass(raidIndex)
 	local c = RAID_CLASS_COLORS[classFilename]
 	local classhexe = string.format("%2x%2x%2x", c.r*255, c.g*255, c.b*255)
 	local nameWithColors = string.format("|cFF%s%s|r",  classhexe, name)
