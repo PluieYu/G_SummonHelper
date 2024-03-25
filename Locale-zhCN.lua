@@ -1,7 +1,7 @@
 
 local L = AceLibrary("AceLocale-2.2"):new("SummonHelper")
 L:RegisterTranslations("zhCN", function() return {
-	["小皮箱术士拉人助手"] = "|cffFF6060[小皮箱]|r|cff9482C9术士拉人助手|r",
+	["小皮箱术士拉人助手"] = "|cffF5F54A[小皮箱]|r|cff9482C9术士拉人助手|r",
 	["已加载"] = "已加载",
 	["重置"] = "重置",
 	["重置拉人界面"] = "重置拉人界面",
@@ -9,7 +9,7 @@ L:RegisterTranslations("zhCN", function() return {
 	["显示拉人界面"]= "显示拉人界面",
 
 	["关键词"] = { "求拉", "求啦" },
-	["团队打字打关键词被拉到 %s"] = "团队打字'求拉'即可被召唤到 |cffF5F54A[%s]|r",
+	["团队打字打关键词被拉到 %s"] = "团队打字|cffF5F54A['求拉']|r即可被召唤到 |cffF5F54A[%s]|r",
 
 	["你正在战斗中"] = "你正在战斗中",
 	["%s 在战斗中"] = " %s 正在战斗中",
