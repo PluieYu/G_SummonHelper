@@ -10,5 +10,5 @@
 ## LoadOnDemand: 0
 Locale-zhCN.lua
 Locale-enUS.lua
-SummonHelper.lua
+G_SummonHelper.lua
 frame.lua
