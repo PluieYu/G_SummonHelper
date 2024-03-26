@@ -18,7 +18,7 @@ function SummonHelperFrame:SetupFrame()
     -- background
     frame:SetBackdrop({
         bgFile = "Interface\\Tooltips\\UI-Tooltip-Background", tile = true, tileSize = 1,
-        edgeFile = "Interface\\AddOns\\SummonHelper\\Textures\\border", edgeSize = 32,
+        edgeFile = "Interface\\AddOns\\G_SummonHelper\\Textures\\border", edgeSize = 32,
         insets = {left = 1, right = 1, top = 20, bottom = 1},
     })
     frame:SetBackdropColor(24/255, 24/255, 24/255)
@@ -71,14 +71,14 @@ function SummonHelperFrame:SetupFrame()
             end
     )
     frame.announceButton.texture= self:CreateButtontexture(
-            frame.announceButton,"ARTWORK ","Interface\\AddOns\\SummonHelper\\Textures\\report", 0,1,0,1)
+            frame.announceButton,"ARTWORK ","Interface\\AddOns\\G_SummonHelper\\Textures\\report", 0,1,0,1)
 
 
     -- close button
     frame.closeButton = self:CreateButton(
             frame, 20,14, 0, -15, "TOPRIGHT", function() frame:Hide() end )
     frame.closeButton.texture = self:CreateButtontexture(
-            frame.closeButton,"ARTWORK","Interface\\AddOns\\SummonHelper\\Textures\\close", 0,1,0,1)
+            frame.closeButton,"ARTWORK","Interface\\AddOns\\G_SummonHelper\\Textures\\close", 0,1,0,1)
 
     frame.header = frame:CreateFontString(nil, "OVERLAY")
     frame.header:SetWidth(width)
