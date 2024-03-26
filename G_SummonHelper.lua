@@ -157,6 +157,7 @@ function SummonHelper:OnCommReceive(_, _, _, method, target)
 			self:Reflash()
 		elseif method=="Remove" and targetPos ~= nil then
 			table.remove(self.SummonList, targetPos)
+			collectgarbage()
 			self:Reflash()
 		elseif method=="Summoning" and targetPos ~= nil then
 			self:HideSummoningTarget(target)
