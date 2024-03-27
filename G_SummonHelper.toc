@@ -1,7 +1,7 @@
 ## Interface: 11200
-## Title: |CFFF5F54A[xiaopixiang]|R|CFF9482C9[WarLock]|R|cffF5F54ASummonHelper
+## Title: |CFFF5F54A[xiaopixiang]|R|CFF9482C9[WarLock]|R|cffF5F54AHelper
 ## Notes: |CFFFF8080xiaopixiang SummonHelper
-## Title-zhCN:|CFFF5F54A[小皮箱]|R|CFF9482C9[术士]|R|cffF5F54A拉人助手
+## Title-zhCN:|CFFF5F54A[小皮箱]|R|CFF9482C9[术士]|R|cffF5F54A助手
 ## Notes-zhCN:|CFFFF8080这是专门为小皮箱定制的术士拉人助手。
 ## Author: Yu
 ## Version: 1.0.0

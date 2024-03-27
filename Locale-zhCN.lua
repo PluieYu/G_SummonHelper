@@ -1,7 +1,7 @@
 
 local L = AceLibrary("AceLocale-2.2"):new("SummonHelper")
 L:RegisterTranslations("zhCN", function() return {
-	["小皮箱术士拉人助手"] = "|cffF5F54A[小皮箱]|r|cff9482C9术士拉人助手|r",
+	["小皮箱术士拉人助手"] = "|cffF5F54A[小皮箱]|r|cff9482C9术士助手|r",
 	["已加载"] = "已加载",
 	["重置"] = "重置",
 	["重置拉人界面"] = "重置拉人界面",
