@@ -64,7 +64,7 @@ function SummonHelperFrame:SetupFrame()
                 if GetNumRaidMembers() > 0 then
                     chatType = "RAID"
                 end
-                SendChatMessage(string.format(self:BuildMessage(L["团队打字打关键词被拉到 %s"]), playerZone ), chatType)
+                SendChatMessage(string.format(SummonHelper:BuildMessage(L["团队打字打关键词被拉到 %s"]), playerZone ), chatType)
             end
     )
     frame.announceButton.texture= self:CreateButtontexture(
