@@ -1,5 +1,5 @@
 ---
---- Documentation https://github.com/PluieYu/SummonHelper?tab=readme-ov-file
+--- Documentation https://github.com/PluieYu/G_SummonHelper?tab=readme-ov-file
 --- Created by Yu.
 --- DateTime: 2024/3/14 21:25
 ---
@@ -9,9 +9,7 @@
 SummonHelper = AceLibrary("AceAddon-2.0"):new("AceEvent-2.0","AceModuleCore-2.0","AceComm-2.0","AceDB-2.0","AceDebug-2.0","AceConsole-2.0","FuBarPlugin-2.0")
 local L = AceLibrary("AceLocale-2.2"):new("SummonHelper")
 
-local Prefix = "SummonHelper"
 local BS = AceLibrary("Babble-Spell-2.2")
---local BZ = AceLibrary("Babble-Zone-2.2")
 local SpellStatus = AceLibrary("SpellStatus-1.0")
 
 SummonHelper.hasIcon = "Interface\\Icons\\spell_shadow_twilight"
@@ -37,8 +35,12 @@ SummonHelper.options = {
 	}
 }
 
+
+
 function SummonHelper:OnInitialize()
-	playerClass = UnitClass("player")
+	self.playerClass = UnitClass("player")
+	self.Prefix =
+	"|cffF5F54A["..base64:dec("5bCP55qu566x").."]|r|cff9482C9"..base64:dec("5pyv5aOr5Yqp5omL").."|r"
 	self:SetDebugLevel(3)
 	self.SummonList = {}
 	self.SummonListHide = {}
@@ -53,9 +55,9 @@ function SummonHelper:OnInitialize()
 	self.SummonHelperFrame = SummonHelperFrame
 	self.SummonHelperFrame:SetupFrame()
 	self.OnMenuRequest = SummonHelper.options
-	self:SetCommPrefix(Prefix)
+	self:SetCommPrefix(self.Prefix)
 	self:RegisterChatCommand({"/smh", "/SummonHelper"}, SummonHelper.options)
-	DEFAULT_CHAT_FRAME:AddMessage(string.format("%s : %s", L["小皮箱术士拉人助手"], L["已加载"]))
+	DEFAULT_CHAT_FRAME:AddMessage(self:BuildMessage(L["已加载"]))
 end
 
 function SummonHelper:OnProfileEnable()
@@ -63,13 +65,13 @@ function SummonHelper:OnProfileEnable()
 end
 
 function SummonHelper:OnEnable()
-	if playerClass ~= "术士" then
+	if self.playerClass ~= "术士" then
 		SummonHelper:OnDisable()
 		return
 	end
-	self:RegisterComm(Prefix, "RAID")
-	if not self:IsCommRegistered(Prefix,"RAID") then
-		self:RegisterComm(Prefix, "RAID")
+	self:RegisterComm(self.Prefix, "RAID")
+	if not self:IsCommRegistered(self.Prefix,"RAID") then
+		self:RegisterComm(self.Prefix, "RAID")
 	end
 	--Register PARTY-RAID-WHISPER chanel
 	self:RegisterEvent("CHAT_MSG_PARTY", "CheckChatMessage")
@@ -95,9 +97,21 @@ function SummonHelper:OnDisable()
 end
 
 
+function SummonHelper:BuildMessage(TEXT, args1, args2 )
+	local subMsg
+	if args2 then
+		 subMsg = format(TEXT, args1, args2)
+	elseif args1 then
+		 subMsg = format(TEXT, args1)
+	else
+		subMsg = TEXT
+	end
+	return format("%s %s", self.Prefix, subMsg)
+end
+
 function SummonHelper:CheckChatMessage(msg, name)
-	local stringLen = string.len( L["小皮箱术士拉人助手"])
-	if string.sub(msg,0, stringLen) ~= L["小皮箱术士拉人助手"] then
+	local stringLen = string.len(self.Prefix)
+	if strsub(msg,0, stringLen) ~= self.Prefix then
 		for _, word in pairs(L["关键词"]) do
 			index_stat, index_end = string.find(msg, word);
 			if index_stat then
@@ -121,7 +135,7 @@ function SummonHelper:SpellStatus_SpellCastChannelingStart(_, name, _, _, _, _)
 	--id, name, fullName, startTime, stopTime, duration
 	if name == BS["Ritual of Summoning"] then
 		self:LevelDebug(2, format("SpellStatus_SpellCastChannelingStart: <%s>", tostring(name)))
-		SendChatMessage(string.format("%s  %s", L["小皮箱术士拉人助手"], L["召唤仪式已经启动"]), "WHISPER", nil, self.SummoningTarget)
+		SendChatMessage(self:BuildMessage(L["召唤仪式已经启动"]), "WHISPER", nil, self.SummoningTarget)
 
 	end
 end
@@ -131,7 +145,7 @@ function SummonHelper:SpellStatus_SpellCastFailure(_, name, _, raison, _, _, _)
 	if name == BS["Ritual of Summoning"] then
 		self:LevelDebug(2, format("SpellStatus_SpellCastFailure on : <%s> for the reason <%s>", tostring(name), tostring(raison)))
 		self:SendCommMessage("RAID","SummoningFailure", self.SummoningTarget )
-		SendChatMessage(string.format("%s  %s", L["小皮箱术士拉人助手"], L["召唤仪式遭到破坏"]), "WHISPER", nil, self.SummoningTarget)
+		SendChatMessage(self:BuildMessage(L["召唤仪式遭到破坏"]), "WHISPER", nil, self.SummoningTarget)
 	end
 end
 
@@ -140,7 +154,7 @@ function SummonHelper:SpellStatus_SpellCastChannelingFinish(_, name, _, raison)
 	--id, name, fullName, raison
 	if name == BS["Ritual of Summoning"] then
 		self:LevelDebug(2, format("SpellStatus_SpellCastChannelingFinish on : <%s> for the reason <%s>", tostring(name), tostring(raison)))
-		SendChatMessage(string.format("%s  %s", L["小皮箱术士拉人助手"], L["召唤仪式已经完成"]), "WHISPER", nil, self.SummoningTarget)
+		SendChatMessage(self:BuildMessage(L["召唤仪式已经完成"]), "WHISPER", nil, self.SummoningTarget)
 		SummonHelper:RemoveFonc(self.SummoningTarget)
 
 	end
@@ -201,16 +215,8 @@ function SummonHelper:SummonFonc(name)
 		if GetNumRaidMembers() > 0 then
 			chatType = "RAID"
 		end
-		SendChatMessage(
-				string.format(
-						string.format("%s  %s", L["小皮箱术士拉人助手"], L["正在将%s拉到 %s"]),
-						self:GetUnitNameWithColors(name), playerZone),
-				chatType)
-		SendChatMessage(
-				string.format(
-						string.format("%s  %s", L["小皮箱术士拉人助手"], L["正在召唤你倒 %s"]),
-						playerZone),
-				"WHISPER", nil, name)
+		SendChatMessage(self:BuildMessage(L["正在将%s拉到 %s"],self:GetUnitNameWithColors(name), playerZone), chatType)
+		SendChatMessage(self:BuildMessage(L["正在召唤你倒 %s"], playerZone), "WHISPER", nil, name)
 	end
 end
 

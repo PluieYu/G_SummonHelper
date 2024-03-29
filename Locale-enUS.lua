@@ -1,7 +1,11 @@
-
+---
+--- Documentation https://github.com/PluieYu/G_SummonHelper?tab=readme-ov-file
+--- Created by Yu.
+--- DateTime: 2024/3/14 21:25
+---
+--
 local L = AceLibrary("AceLocale-2.2"):new("SummonHelper")
 L:RegisterTranslations("enUS", function() return {
-	["小皮箱术士拉人助手"] = "|cffF5F54A[xiaopixiang]|r|cff9482C9WarLockSummonHelper|r",
 	["已加载"] = "loaded",
 	["重置"] = "ResetPos",
 	["重置拉人界面"] = "Reset frame position",
