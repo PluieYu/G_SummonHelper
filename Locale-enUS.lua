@@ -13,7 +13,7 @@ L:RegisterTranslations("enUS", function() return {
 	["显示拉人界面"]= "Show SummonHelperFrame",
 	["关键词"] = { 'Summon', 'summon' },
 	["团队打字打关键词被拉到 %s"] = "write the key words |cffF5F54A['Summon']|r in raid to get summon to |cffF5F54A[%s]|r",
-
+	["术士"] = "术士",
 	["你正在战斗中"] = "You are in combat",
 	["%s 在战斗中"] = " %s is in combat",
 	["%s 已在身边"] = " %s is already here",

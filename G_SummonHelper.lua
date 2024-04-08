@@ -65,7 +65,7 @@ function SummonHelper:OnProfileEnable()
 end
 
 function SummonHelper:OnEnable()
-	if self.playerClass ~= "术士" then
+	if self.playerClass ~= L["术士"]then
 		SummonHelper:OnDisable()
 		return
 	end
