@@ -94,16 +94,18 @@ function SummonHelper:CheckChatMessage(msg, name)
 	local SLLen = tLength(self.SummonList)
 	if strsub(msg,0, stringLen) ~= self.Prefix then
 		if tContain(self.SummonList, name) then
+			SendChatMessage(buildMessage(L["你已在队列中" ], tostring(SLLen)), "WHISPER", nil, name)
 		else
 			for _, word in pairs(L["关键词"]) do
 				index_stat, index_end = string.find(msg, word);
 				if index_stat then
 					addT(self.SummonList, name)
 					SHMain:Flush()
+					SendChatMessage(buildMessage(L["你已在队列中" ], tostring(SLLen)), "WHISPER", nil, name)
 				end
 			end
 		end
-		SendChatMessage(buildMessage(L["你已在队列中" ], tostring(SLLen)), "WHISPER", nil, name)
+
 	end
 end
 function SummonHelper:OnCommReceive(_, sender, _, method, target)
