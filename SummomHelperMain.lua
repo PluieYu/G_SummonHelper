@@ -167,3 +167,11 @@ function SHMain:Flush()
     end
 end
 
+function SHMain:ResetFramePosition()
+    self.position.point = "center"
+    self.position.relativePoint = "center"
+    self.position.xOfs = 0
+    self.position.yOfs = 0
+    self.mf:ClearAllPoints()
+    self.mf:SetPoint(self.position.point, UIParent, self.position.relativePoint, self.position.xOfs, self.position.yOfs)
+end

@@ -4,7 +4,7 @@
 ## Title-zhCN:|CFFF5F54A[小皮箱]|R|CFF9482C9[术士]|R|cffF5F54A助手
 ## Notes-zhCN:|CFFFF8080这是专门为小皮箱定制的术士拉人助手。
 ## Author: Yu
-## Version: 1.2.0
+## Version: 1.2.1
 ## SavedVariables: SummonHelperDB
 ## DefaultState: Enabled
 ## LoadOnDemand: 0

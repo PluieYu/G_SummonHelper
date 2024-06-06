@@ -24,14 +24,14 @@ SummonHelper.options = {
 			name = L["重置"],
 			desc = L["重置拉人界面"],
 			order = 1,
-			func = function() SummonHelper.SummonHelperFrame:ResetFramePosition() end,
+			func = function() SHMain:ResetFramePosition() end,
 		},
 		ShowFrame = {
 			type = "execute",
 			name = L["显示"],
 			desc = L["显示拉人界面"],
 			order = 1,
-			func = function() SummonHelper.SummonHelperFrame.frame:Show() end,
+			func = function() SHMain.mf:Show() end,
 		},
 	}
 }
